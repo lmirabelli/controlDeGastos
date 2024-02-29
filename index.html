@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="js/main.js"></script>
+    <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="style/index.css">
+    <title>Control de Gastos</title>
+</head>
+<body>
+    <nav class="menu"></nav>
+    <div class="botonera">
+        <button id="ingreso">Ingreso</button>
+        <button id="egreso">Egreso</button>
+        <button id="pagos">Pagos Hechos</button>
+        <button id="nuevoMes">Nuevo Mes</button>
+    </div>
+    <main>
+        <div class="w75" id="tituloMes"></div>
+        <div id="transacciones" class="mitad izquierda">
+            <div id="tablaIngreso" class="tabla"></div>
+            <div id="tablaEgreso" class="tabla"></div>
+            <div id="balance">Balance: $0</div>
+        </div>
+        <div class="mitad derecha">
+            <div id="pagosBox" class="tabla"></div>
+        </div>
+        <div class="w75">
+            <button id="guardar">Guardar</button>
+            <button id="cargar">Cargar Mes</button>
+        </div>
+        <div class="historial"></div>
+        
+    </main>
+    <div class="modal" id="modalIngreso">
+        <h3>Ingreso</h3>
+        <label for="ingCategoria">Categoria: <input id="ingCategoria" type="text" placeholder="ej. Salario"></label>
+        <label for="ingNombre">Nombre: <input id="ingNombre" type="text" placeholder="ej. Sueldo de Jose"></label>
+        <label for="ingMonto">Monto: <input id="ingMonto" type="number" placeholder="$$$"></label>
+        <button id="buttonIDinero">Agregar</button>
+    </div>
+    <div class="modal" id="modalEgreso">
+        <h3>Egreso</h3>
+        <label for="egreFechaVencimiento"><input type="date" id="egreFechaVencimiento"></label>
+        <label for="egreCategoria">Categoria: <input id="egreCategoria" type="text" placeholder="ej. Tarjeta"></label>
+        <label for="egreNombre">Nombre: <input id="egreNombre" type="text" placeholder="ej. Visa de Jose"></label>
+        <label for="egreMonto">Monto: <input id="egreMonto" type="number" placeholder="$$$"></label>
+        <button id="buttonEDinero">Agregar</button>
+    </div>
+    <div class="modal" id="modalPagos"></div>
+    <div class="modal" id="modalCarga"></div>
+    <div class="modal" id="modalNuevoMes"></div>
+    <footer>
+       
+        <div class="info">
+            <h4>Info</h4>
+            <p>Aplicacion dedicada para en control de gastos mensuales, donde no queda regitrada en ninguna base de datos ya que toda la informacion ingresada queda alojada en el navegador del usuario, por lo tanto la modificacion de datos debe ser realizada desde el mismo equipo.</p>
+        </div>
+        <div class="redes">
+            <h4>Redes y Contacto</h4>
+            <a href="https://www.linkedin.com/in/leomirabelli/"><img src="img/linkedin.png"></a>
+            <a href="https://github.com/lmirabelli"><img src="img/Github.png"></a>
+            <a href="https://lmirabelli.github.io/portafolio2023/"><img src="img/logo.png"></a>
+            <a href="mailto:leogastonmirabelli@gmail.com"><img src="img/gmail.png"></a>
+        </div>
+    </footer>
+</body>
+</html>
