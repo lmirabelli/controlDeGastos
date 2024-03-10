@@ -12,6 +12,7 @@ const modalPagos = document.getElementById('modalPagos')
 const modalCarga = document.getElementById('modalCarga')
 const modalNuevoMes = document.getElementById('modalNuevoMes')
 const historial = document.querySelector('.historial')
+const buttonCerrarModal = document.querySelectorAll('.cerrarModal')
 let modales = document.querySelectorAll('.modal')
 
 // Asignando los nombres de los arrays que se utilizaran
@@ -106,7 +107,22 @@ let impresionEnPantalla = () => {
 
     // Verifica si la lista de pagos hechos tiene datos, si es asi coloca el pago realizado en la columna de pagos
     if(listaDePagos.length > 0){
-
+        console.log(listaDePagos)
+        listaDePagos.sort((a,b) => {
+            if(a.categoria < b.categoria){
+                return -1
+            }
+            if(a.categoria > b.categoria){
+                return 1
+            }
+            if(a.nombre < b.nombre){
+                return -1
+            }
+            if(a.nombre > b.nombre){
+                return 1
+            }
+            return 0
+        })
         pagosBox.innerHTML = `<h2>Pagos</h2>`
         for(i of listaDePagos){
 
@@ -239,11 +255,14 @@ let agregarPago = () => {
         
         if(i.resto > 0 || i.resto == undefined){
             modalPagos.innerHTML += `<div class="linea aPagar" data-itemid="${i.itemID}">
-        ${i.categoria} - ${i.nombre}: ${i.cantidad.toFixed(2)} <input type="number" placeholder="$$$" class="valor"><input type="date" class="fecha">
+            <div class="descripcion">${i.categoria} - ${i.nombre}: $${i.cantidad.toFixed(2)}</div>
+            <input type="number" placeholder="$$$" class="valor">
+            <input type="date" class="fecha">
         </div>`
         }
     }
-    modalPagos.innerHTML += `<button id="checkPagosButton">Listo !!!</button>`
+    modalPagos.innerHTML += `<button id="checkPagosButton">Listo !!!</button>
+    <button class="cerrarModal" onClick="cerrarModal()">X</button>`
 
     checkPagosButton.addEventListener('click', () => checkPagos(modalPagos))
 }
@@ -386,16 +405,18 @@ let armarMesNuevo = () => {
     modalNuevoMes.innerHTML += `<h4>Ingresos</h4>`
     for(i of listaDeMeses[cantidadDeMeses - 1].ingresosDinero){
         modalNuevoMes.innerHTML += `<label class="campo-transaccion">
-        ${i.categoria}-${i.nombre}<input type="number" placeholder="$$$" data-transaccion="ingreso" data-categoria="${i.categoria}" data-nombre="${i.nombre}">
+        ${i.categoria}-${i.nombre}<input type="number" placeholder="$$$" data-transaccion="ingreso" data-categoria="${i.categoria}" data-nombre="${i.nombre}" value="${i.cantidad}">
         </label>`
     }
     modalNuevoMes.innerHTML += `<h4>Egresos</h4>`
     for(i of listaDeMeses[cantidadDeMeses - 1].egresosDinero){
+        console.log(i)
         modalNuevoMes.innerHTML += `<label class="campo-transaccion">
-        ${i.categoria}-${i.nombre}<input type="number" placeholder="$$$" data-transaccion="egreso" data-categoria="${i.categoria}" data-nombre="${i.nombre}">
+        ${i.categoria}-${i.nombre}<input type="number" placeholder="$$$" data-transaccion="egreso" data-categoria="${i.categoria}" data-nombre="${i.nombre}" value="${i.cantidad}">
         </label>`
     }
-    modalNuevoMes.innerHTML += `<button id="crearMes">Crear Mes</button>`
+    modalNuevoMes.innerHTML += `<button id="crearMes">Crear Mes</button>
+    <button class="cerrarModal" onClick="cerrarModal()">X</button>`
     document.getElementById('crearMes').addEventListener('click', () => agregandoMes())
 }
 
@@ -494,3 +515,6 @@ historial.addEventListener('click', (e) => {
     }
 
 })
+for(i of buttonCerrarModal){
+    i.addEventListener('click', () => cerrarModal())
+}
